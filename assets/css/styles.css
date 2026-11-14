@@ -573,3 +573,23 @@ p { margin: 0; }
 }
 
 .price-quote strong { font-size: 1.25rem; }
+
+/* ---------- Social icons ---------- */
+.socials { display: flex; gap: .75rem; flex-wrap: wrap; }
+.social {
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--lilac); color: var(--plum); border: 2px solid #fff;
+  box-shadow: 0 6px 16px rgba(120, 70, 150, .14);
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.social svg { width: 22px; height: 22px; }
+.social:hover, .social:focus-visible { background: var(--coral); color: #fff; transform: translateY(-2px); }
+.socials-label { margin-top: 1.4rem !important; margin-bottom: .7rem; font-weight: 800; color: var(--plum); }
+.site-footer .social { background: rgba(255, 255, 255, .7); }
+.site-footer .social:hover, .site-footer .social:focus-visible { background: var(--coral); }
+@media (max-width: 900px) {
+  .contact-intro .socials { justify-content: center; }
+}
+@media (max-width: 600px) {
+  .site-footer .socials { justify-content: center; }
+}
