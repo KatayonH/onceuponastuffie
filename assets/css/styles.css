@@ -176,7 +176,7 @@ p { margin: 0; }
 .about { padding-block: 6rem 4rem; }
 .about-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center; }
 .about-photo { margin: 0; position: relative; }
-.about-photo > img:first-child { border-radius: 30px; border: 8px solid #fff; box-shadow: var(--shadow); aspect-ratio: 4 / 3.3; object-fit: cover; width: 100%; }
+.about-photo > img:first-child { border-radius: 30px; border: 2px solid #fff; box-shadow: var(--shadow); aspect-ratio: 4 / 3.3; object-fit: cover; width: 100%; }
 .deco-about-hearts { position: absolute; width: 54px; left: 18px; bottom: 18px; }
 .about h2 { font-size: clamp(1.9rem, 3.3vw, 2.6rem); font-weight: 800; }
 .deco-inline-star { display: inline-block; width: 74px; vertical-align: middle; margin-left: .25rem; }
