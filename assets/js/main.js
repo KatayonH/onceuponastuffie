@@ -1,7 +1,7 @@
 /* Once Upon a Stuffie */
 
-// Amanda's Cal.com booking link, e.g. "amanda-stuffie/party" (from cal.com/amanda-stuffie/party).
-const CAL_LINK = "";
+// Amanda's Cal.com page. Shows both party packages until a parent picks one in the modal.
+const CAL_LINK = "onceuponastuffie";
 const BRAND = "#D9405A";
 
 document.documentElement.classList.add("js");
@@ -38,37 +38,53 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
   });
 }
 
-/* Package picked -> shown in booking + passed to Cal.com notes */
-let pickedPackage = "";
+/* Birthday Bash packages modal */
+const pkgModal = document.getElementById("pkg-modal");
 const pickedWrap = document.querySelector(".booking-picked");
-document.querySelectorAll("[data-package]").forEach((btn) => {
+
+function openPackages() {
+  if (!pkgModal) return;
+  if (typeof pkgModal.showModal === "function") pkgModal.showModal();
+  else location.hash = "#booking";
+}
+function closePackages() {
+  if (pkgModal && pkgModal.open) pkgModal.close();
+}
+
+document.querySelectorAll("[data-open-packages]").forEach((btn) => btn.addEventListener("click", openPackages));
+document.querySelectorAll("[data-close-packages]").forEach((btn) => btn.addEventListener("click", closePackages));
+if (pkgModal) {
+  // Click on the dimmed backdrop closes it
+  pkgModal.addEventListener("click", (e) => { if (e.target === pkgModal) closePackages(); });
+}
+
+document.querySelectorAll("[data-book]").forEach((btn) => {
   btn.addEventListener("click", () => {
-    pickedPackage = btn.dataset.package;
     if (pickedWrap) {
       pickedWrap.hidden = false;
-      pickedWrap.querySelector("[data-picked]").textContent = pickedPackage;
+      pickedWrap.querySelector("[data-picked]").textContent = `Birthday Bash, ${btn.dataset.bookName}`;
     }
-    loadCal();
+    closePackages();
+    showCal(btn.dataset.book);
+    document.getElementById("booking")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+});
+
+/* Inquire buttons -> contact form with the event type picked */
+const eventSelect = document.getElementById("c-type");
+document.querySelectorAll("[data-inquire]").forEach((link) => {
+  link.addEventListener("click", () => {
+    if (eventSelect) eventSelect.value = link.dataset.inquire;
+    setTimeout(() => document.getElementById("c-name")?.focus({ preventScroll: true }), 400);
   });
 });
 
 /* Cal.com inline embed, loaded only when the booking section gets close */
 const calEl = document.getElementById("cal-booking");
-let calLoaded = false;
+let calShown = "";
 
-function loadCal() {
-  if (calLoaded || !calEl) return;
-  calLoaded = true;
-
-  if (!CAL_LINK) {
-    calEl.innerHTML = `
-      <div class="cal-missing">
-        <p><strong>The booking calendar is almost ready.</strong><br>In the meantime, send a note and we'll check your date.</p>
-        <a class="btn btn-coral" href="#contact">Ask About My Date</a>
-      </div>`;
-    return;
-  }
-
+function loadCalScript() {
+  if (window.Cal) return;
   (function (C, A, L) {
     const p = function (a, ar) { a.q.push(ar); };
     const d = C.document;
@@ -85,20 +101,40 @@ function loadCal() {
       p(cal, ar);
     };
   })(window, "https://app.cal.com/embed/embed.js", "init");
+}
 
-  Cal("init", "booking", { origin: "https://cal.com" });
+function showCal(link) {
+  if (!calEl || !link || link === calShown) return;
+  calShown = link;
+  loadCalScript();
+  // One namespace per link, so switching packages draws a fresh calendar
+  const ns = link.replace(/[^a-z0-9]/gi, "-");
   calEl.innerHTML = "";
-  Cal.ns.booking("inline", {
+  Cal("init", ns, { origin: "https://cal.com" });
+  Cal.ns[ns]("inline", {
     elementOrSelector: "#cal-booking",
-    calLink: CAL_LINK,
-    config: Object.assign({ layout: "month_view", theme: "light" }, pickedPackage ? { notes: `Package: ${pickedPackage}` } : {}),
+    calLink: link,
+    config: { layout: "month_view", theme: "light" },
   });
-  Cal.ns.booking("ui", {
+  Cal.ns[ns]("ui", {
     theme: "light",
     layout: "month_view",
     hideEventTypeDetails: false,
     cssVarsPerTheme: { light: { "cal-brand": BRAND } },
   });
+}
+
+function loadCal() {
+  if (calShown || !calEl) return;
+  if (!CAL_LINK) {
+    calEl.innerHTML = `
+      <div class="cal-missing">
+        <p><strong>The booking calendar is almost ready.</strong><br>In the meantime, send a note and we'll check your date.</p>
+        <a class="btn btn-coral" href="#contact">Ask About My Date</a>
+      </div>`;
+    return;
+  }
+  showCal(CAL_LINK);
 }
 
 if (calEl) {
