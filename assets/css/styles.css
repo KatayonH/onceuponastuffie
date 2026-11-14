@@ -668,3 +668,12 @@ p { margin: 0; }
   .step img:not(.deco) { order: -1; width: auto; height: 104px; object-fit: contain; justify-self: center; margin: 0 0 .5rem; }
   .step h2 { justify-content: center; }
 }
+
+/* About on tablets: photo and copy side by side, pills stacked */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .about-inner { grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
+  .chips { grid-template-columns: 1fr; max-width: 320px; gap: .6rem; }
+  .about-inner { align-items: stretch; }
+  .about-photo { height: 100%; }
+  .about-photo > img:first-child { height: 100%; aspect-ratio: auto; object-position: 40% 50%; }
+}
