@@ -52,7 +52,7 @@ body {
     radial-gradient(1200px 600px at 100% 40%, #F6E8FB 0%, transparent 60%),
     radial-gradient(900px 600px at 0% 75%, #FCE9F1 0%, transparent 60%),
     var(--bg);
-  overflow-x: hidden;
+  overflow-x: hidden; overflow-x: clip;
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
@@ -679,7 +679,7 @@ p { margin: 0; }
 }
 
 /* Lock page scroll while the mobile menu is open */
-html.nav-open, html.nav-open body { overflow: hidden; overscroll-behavior: none; }
+html.nav-open { overflow: hidden; overscroll-behavior: none; }
 
 /* Mobile hero: room photo sized to the top of the hero, stuffies sit on it */
 @media (max-width: 900px) {
