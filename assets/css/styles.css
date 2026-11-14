@@ -593,3 +593,33 @@ p { margin: 0; }
 @media (max-width: 600px) {
   .site-footer .socials { justify-content: center; }
 }
+
+/* ---------- Footer: content sits fully on the purple clouds ---------- */
+.site-footer {
+  --cloud-h: calc(100vw * 251 / 1422);
+  min-height: 0;
+  justify-content: flex-start;
+  padding: calc(var(--cloud-h) * .82) 0 1.75rem;
+  background:
+    url("/assets/img/clouds.webp") center top / 100% auto no-repeat,
+    linear-gradient(to bottom, transparent calc(var(--cloud-h) * .9), #D7C8F2 calc(var(--cloud-h) * .9), #D3C2EF 100%);
+}
+.site-footer .copyright { margin-top: 1rem; }
+@media (max-width: 900px) {
+  .site-footer {
+    --cloud-h: calc(260vw * 251 / 1422);
+    padding-top: calc(var(--cloud-h) * .8);
+    background-size: 260% auto, auto;
+  }
+}
+@media (max-width: 900px) {
+  .footer-inner { flex-direction: column; text-align: center; }
+  .site-footer .socials { justify-content: center; }
+}
+
+/* Social icons: Amanda's illustrated tiles */
+.social, .site-footer .social {
+  width: 56px; height: 56px; border-radius: 16px; background: none; border: 0; box-shadow: none; padding: 0;
+}
+.social img { width: 100%; height: 100%; display: block; filter: drop-shadow(0 6px 10px rgba(120, 70, 150, .18)); }
+.social:hover, .social:focus-visible, .site-footer .social:hover, .site-footer .social:focus-visible { background: none; transform: translateY(-3px) rotate(-3deg); }
