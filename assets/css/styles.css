@@ -702,3 +702,8 @@ html.nav-open { overflow: hidden; overscroll-behavior: none; }
   .site-nav.is-open { transform: none; }
   html.nav-open .site-header { background: #FDF6FB; border-bottom-color: transparent; }
 }
+
+/* Mobile: breathing room between the hero buttons and the steps card */
+@media (max-width: 900px) {
+  .steps-wrap { margin-top: -1.5rem; }
+}
