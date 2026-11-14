@@ -661,3 +661,10 @@ p { margin: 0; }
   .footer-inner { grid-template-columns: 1fr; justify-items: center; }
   .footer-inner > nav { justify-self: center; }
 }
+
+/* Steps on iPad landscape: picture on top, centered text below */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .step { grid-template-columns: 1fr; justify-items: center; align-content: start; text-align: center; padding: .5rem 1rem 1rem; }
+  .step img:not(.deco) { order: -1; width: auto; height: 104px; object-fit: contain; justify-self: center; margin: 0 0 .5rem; }
+  .step h2 { justify-content: center; }
+}
