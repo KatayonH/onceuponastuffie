@@ -689,3 +689,16 @@ html.nav-open { overflow: hidden; overscroll-behavior: none; }
   .hero-art { padding-top: clamp(110px, 30vw, 200px); }
   .hero-inner { padding-block: 1rem 4rem; gap: 2.25rem; }
 }
+
+/* Mobile menu attached to the header: same surface, no gap, full width */
+@media (max-width: 900px) {
+  .site-nav {
+    top: 100%; left: 0; right: 0; margin-top: -1px;
+    padding: .5rem 1rem 1.25rem; border-radius: 0 0 24px 24px;
+    background: #FDF6FB; box-shadow: 0 18px 30px rgba(91, 37, 105, .14);
+    border-top: 1px solid rgba(235, 221, 240, .8);
+    transform: translateY(-6px);
+  }
+  .site-nav.is-open { transform: none; }
+  html.nav-open .site-header { background: #FDF6FB; border-bottom-color: transparent; }
+}
