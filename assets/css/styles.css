@@ -677,3 +677,15 @@ p { margin: 0; }
   .about-photo { height: 100%; }
   .about-photo > img:first-child { height: 100%; aspect-ratio: auto; object-position: 40% 50%; }
 }
+
+/* Lock page scroll while the mobile menu is open */
+html.nav-open, html.nav-open body { overflow: hidden; overscroll-behavior: none; }
+
+/* Mobile hero: room photo sized to the top of the hero, stuffies sit on it */
+@media (max-width: 900px) {
+  .hero-bg { bottom: auto; height: clamp(380px, 100vw, 640px); }
+  .hero-bg img { object-position: 62% 60%; }
+  .hero::before { background: linear-gradient(180deg, rgba(253, 246, 251, .25) 0%, rgba(253, 246, 251, .2) clamp(180px, 50vw, 340px), var(--bg) clamp(380px, 100vw, 640px)); }
+  .hero-art { padding-top: clamp(110px, 30vw, 200px); }
+  .hero-inner { padding-block: 1rem 4rem; gap: 2.25rem; }
+}
