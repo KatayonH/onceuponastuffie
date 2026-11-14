@@ -139,7 +139,7 @@ p { margin: 0; }
 .hero-copy { position: relative; max-width: 560px; }
 .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.4rem); font-weight: 800; }
 .hero h1 em { font-style: normal; color: var(--coral); }
-.deco-hero-star { position: absolute; width: clamp(80px, 8vw, 120px); left: clamp(-64px, -4vw, -8px); top: -52px; transform: scaleX(-1) rotate(-8deg); opacity: .95; }
+.deco-hero-star { position: absolute; width: clamp(80px, 8vw, 120px); left: clamp(-64px, -4vw, -8px); top: -52px; transform: rotate(-8deg); opacity: .95; }
 .lead { margin-top: 1.25rem; font-size: 1.15rem; max-width: 30em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
 .hero-art { position: relative; display: grid; justify-items: center; align-content: center; gap: clamp(1rem, 2vw, 1.75rem); padding-top: calc(clamp(220px, 22vw, 320px) + clamp(1rem, 2vw, 1.75rem)); }
